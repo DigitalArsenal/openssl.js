@@ -48,6 +48,7 @@
     "dev": "nodemon -w src --exec 'npm run build && npm run test'"
   },
   "dependencies": {
+    "bl": ">=0.9.5",
     "@wasmer/wasi": "^0.4.5",
     "@wasmer/wasm-transformer": "^0.4.5",
     "@wasmer/wasmfs": "^0.4.5",
