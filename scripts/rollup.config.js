@@ -1,11 +1,11 @@
-import { terser } from "rollup-plugin-terser";
 import brotli from "rollup-plugin-brotli";
-import globals from "rollup-plugin-node-globals";
-import commonjs from "rollup-plugin-commonjs";
-import resolve from "rollup-plugin-node-resolve";
 import builtins from "rollup-plugin-node-builtins";
-import url from "rollup-plugin-url";
+import commonjs from "rollup-plugin-commonjs";
 import fs from 'fs';
+import resolve from "rollup-plugin-node-resolve";
+import { terser } from "rollup-plugin-terser";
+import url from "rollup-plugin-url";
+
 
 let wasmb64 = fs.readFileSync('./src/openssl.wasm').toString('base64');
 
