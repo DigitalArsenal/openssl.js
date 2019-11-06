@@ -21,10 +21,10 @@ export class OpenSSL {
       if (isNode) {
         const { fileURLToPath } = await import("url");
         const { dirname, resolve } = await import("path");
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = dirname(__filename);
+        const _filename = fileURLToPath(import.meta.url);
+        const _dirname = dirname(_filename);
         const wasmBinary = readFileSync(
-          resolve(__dirname, this.wasmBinaryPath)
+          resolve(_dirname, this.wasmBinaryPath)
         );
         return run({ command, wasmBinary, ...this });
       } else {

@@ -1,7 +1,32 @@
-import crypto from 'crypto';
-import fs from 'fs';
-import tty from 'tty';
-import path from 'path';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+function _interopNamespace(e) {
+	if (e && e.__esModule) { return e; } else {
+		var n = {};
+		if (e) {
+			Object.keys(e).forEach(function (k) {
+				var d = Object.getOwnPropertyDescriptor(e, k);
+				Object.defineProperty(n, k, d.get ? d : {
+					enumerable: true,
+					get: function () {
+						return e[k];
+					}
+				});
+			});
+		}
+		n['default'] = e;
+		return n;
+	}
+}
+
+var crypto = _interopDefault(require('crypto'));
+var fs = _interopDefault(require('fs'));
+var tty = _interopDefault(require('tty'));
+var path = _interopDefault(require('path'));
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -93,8 +118,8 @@ const run = async args => {
 
   }
   if (isNode && !_filename) {
-    const { fileURLToPath } = await import('url'); //SyntaxError: Parenthesized pattern ({fileURLToPath})
-    _filename = fileURLToPath(import.meta.url);
+    const { fileURLToPath } = await new Promise(function (resolve) { resolve(_interopNamespace(require('url'))); }); //SyntaxError: Parenthesized pattern ({fileURLToPath})
+    _filename = fileURLToPath((typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('openssl.cjs.js', document.baseURI).href)));
   }
 
   let command = ["openssl"].concat(
@@ -124,7 +149,7 @@ const run = async args => {
     } catch (e) { }
   } else {
     const { wasmBinary, ...envArgs } = args;
-    const { fork } = await import('child_process');
+    const { fork } = await new Promise(function (resolve) { resolve(_interopNamespace(require('child_process'))); });
     let cp = fork(_filename, {
       silent: false,
       env: {
@@ -154,7 +179,7 @@ if (isNode && process.env.WORKER) {
     } else {
       throw Error(`${new Date().toISOString()} Invalid Wasm Binary Format.`);
     }
-    args.fs = await import('fs'); //In Node
+    args.fs = await new Promise(function (resolve) { resolve(_interopNamespace(require('fs'))); }); //In Node
     run(args);
   });
 }
@@ -191,9 +216,9 @@ class OpenSSL {
       if (!existsSync(this.rootDir)) mkdirSync(this.rootDir);
 
       if (isNode) {
-        const { fileURLToPath } = await import('url');
-        const { dirname, resolve } = await import('path');
-        const _filename = fileURLToPath(import.meta.url);
+        const { fileURLToPath } = await new Promise(function (resolve) { resolve(_interopNamespace(require('url'))); });
+        const { dirname, resolve } = await new Promise(function (resolve) { resolve(_interopNamespace(require('path'))); });
+        const _filename = fileURLToPath((typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('openssl.cjs.js', document.baseURI).href)));
         const _dirname = dirname(_filename);
         
         return run({ command, wasmBinary, ...this });
@@ -207,4 +232,4 @@ class OpenSSL {
   }
 }
 
-export { OpenSSL };
+exports.OpenSSL = OpenSSL;

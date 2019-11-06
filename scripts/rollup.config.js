@@ -48,8 +48,8 @@ const plugins = [
     include: ["**/*.wasm"],
     emitFiles: true
   }),
-  terser(),
-  brotli()
+  //terser(),
+  //brotli()
 ];
 const external = ["child_process", "url", "fs", "crypto", "tty", "path"];
 export default [
@@ -69,8 +69,20 @@ export default [
   {
     input: "./src/openssl.js",
     output: {
-      file: "./dist/node.openssl.js",
+      file: "./dist/openssl.js",
       format: "esm"
+    },
+    plugins: [
+      replacr(/import[\s\S]{1,}@wasmer\/wasi["'`];[^;]{1,};/, `import WASI from "@wasmer/wasi/lib/index.cjs.js";`, true),
+      ...plugins
+    ],
+    external
+  },
+  {
+    input: "./src/openssl.js",
+    output: {
+      file: "./dist/openssl.cjs.js",
+      format: "cjs"
     },
     plugins: [
       replacr(/import[\s\S]{1,}@wasmer\/wasi["'`];[^;]{1,};/, `import WASI from "@wasmer/wasi/lib/index.cjs.js";`, true),

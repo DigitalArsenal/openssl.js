@@ -3,10 +3,15 @@ const WASI = isNode ? _WASI.WASI : _WASI; //module issue
 import { isNode } from "./isNode.js";
 
 export const run = async args => {
-  let __filename;
-  if (isNode) {
+  let _filename;
+  try {
+    _filename = __filename
+  } catch (e) {
+
+  }
+  if (isNode && !_filename) {
     const { fileURLToPath } = await import("url"); //SyntaxError: Parenthesized pattern ({fileURLToPath})
-    __filename = fileURLToPath(import.meta.url);
+    _filename = fileURLToPath(import.meta.url);
   }
 
   let command = ["openssl"].concat(
@@ -33,17 +38,22 @@ export const run = async args => {
 
     try {
       wasi.start(instance);
-    } catch (e) {}
+    } catch (e) { }
   } else {
     const { wasmBinary, ...envArgs } = args;
     const { fork } = await import("child_process");
-    let cp = fork(__filename, {
+    let cp = fork(_filename, {
       silent: false,
       env: {
         args: JSON.stringify(envArgs),
         WORKER: true
       }
     });
+
+    cp.on('error', () => {
+      console.error('no wasm')
+    });
+
     cp.send({ wasmBinary: wasmBinary });
     return new Promise((resolve, reject) => {
       cp.on("exit", code => {

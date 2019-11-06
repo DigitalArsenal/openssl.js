@@ -1,4 +1,4 @@
-import { OpenSSL } from "../dist/node.openssl.js";
+import { OpenSSL } from "../dist/openssl.js";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
