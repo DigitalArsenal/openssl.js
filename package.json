@@ -36,7 +36,13 @@
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.2",
-    "rollup-plugin-url": "^3.0.0"
+    "rollup-plugin-url": "^3.0.0",
+    "bl": ">=0.9.5",
+    "@wasmer/wasi": "^0.4.5",
+    "@wasmer/wasm-transformer": "^0.4.5",
+    "@wasmer/wasmfs": "^0.4.5",
+    "browserfs": "^1.4.3",
+    "optimist": "^0.6.1"
   },
   "scripts": {
     "test:cjs": "node ./test/test.cjs.js",
@@ -49,12 +55,5 @@
     "dev": "nodemon -w src --exec 'npm run build && npm run test'"
   },
   "dependencies": {
-    "bl": ">=0.9.5",
-    "@wasmer/wasi": "^0.4.5",
-    "@wasmer/wasm-transformer": "^0.4.5",
-    "@wasmer/wasmfs": "^0.4.5",
-    "browserfs": "^1.4.3",
-    "optimist": "^0.6.1",
-    "rollup-plugin-node-globals": "^1.4.0"
   }
 }

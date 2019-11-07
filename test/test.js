@@ -1,10 +1,8 @@
 import { OpenSSL } from "../dist/openssl.js";
-import fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import WFS from "@wasmer/wasmfs";
 import path from "path";
-import os from "os";
+import fs from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
