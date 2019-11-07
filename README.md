@@ -3,9 +3,10 @@
 ![npm](https://img.shields.io/npm/v/openssl.js)
 ![dependencies](https://img.shields.io/david/digitalarsenal/openssl.js)
 
-### A WebAssembly port of OpenSSL for [node](https://nodejs.org) and the browser.
+### A WebAssembly port of [OpenSSL](https://openssl.org) for [node](https://nodejs.org) and the browser.
 
-
+## NOTE:  
+This is a source-code build of [OpenSSL](https://openssl.org) using the [wasienv toolchain](https://github.com/wasienv/wasienv).  The test suite is still under development.  Until it is complete, the author makes no claims concerning accuracy or security.  Use at your own risk.
 
 Quick Start
 =

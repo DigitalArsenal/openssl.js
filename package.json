@@ -1,7 +1,7 @@
 {
   "name": "openssl.js",
   "type": "module",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "WebAssembly port of OpenSSL",
   "main": "/dist/openssl.js",
   "browser": "dist/browser.openssl.js",
@@ -45,14 +45,16 @@
     "optimist": "^0.6.1"
   },
   "scripts": {
+    "test": "npm run test:main && npm run test:cjs",
     "test:cjs": "node ./test/test.cjs.js",
-    "test": "node --experimental-wasm-bigint --experimental-modules ./test/test.js && npm run test:cjs",
+    "test:main":"node --experimental-wasm-bigint --experimental-modules ./test/test.js",
     "postinstall": "cp node_modules/@wasmer/wasmfs/lib/index.esm.js src/wasmfs.esm.js",
     "build": "mkdir -p dist && rm -rf dist/*.* && npm run build:browser",
     "build:openssl": "cd packages/openssl && ./build.sh && cp openssl.wasm ../../src/openssl.wasm && cd ../../ && npm run build:transform",
     "build:transform": "node --experimental-modules ./scripts/transform.mjs --src ./src/raw-wasm/openssl1.1.1d.wasm --out ./src/openssl.wasm",
     "build:browser": "rollup -c ./scripts/rollup.config.js",
-    "dev": "nodemon -w src --exec 'npm run build && npm run test'"
+    "dev": "nodemon -w src --exec 'npm run build && npm run test'",
+    "dev:test": "nodemon -w test --exec 'npm run test:main'"
   },
   "dependencies": {}
 }
