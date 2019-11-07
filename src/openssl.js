@@ -1,9 +1,26 @@
+/**
+ * ECMAScript Interface to WASM port of OpenSSL (https://www.openssl.org)
+ * @module OpenSSL
+ * 
+ * @license Apache-2.0
+ * @copyright 2019 DIGITALARSENAL.IO, INC.
+ */
+
 import { run } from "./command.js";
 import { isNode } from "./isNode.js";
 
+/* Default path to the WebAssembly file */
 const wasmPath = "openssl.wasm";
 
+
+/** Class representing an OpenSSL session */
 export class OpenSSL {
+  /**
+   * Create an OpenSSL instance
+   * @param {Object} args
+   * @param {Object} fs - The file system object to use
+   * @param {string} rootDir - The file system root path to use 
+   */
   constructor(args) {
     if (!args) throw Error("Arguments Not Defined");
 

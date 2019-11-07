@@ -1,3 +1,11 @@
+/**
+ * ECMAScript Interface to WASM port of OpenSSL (https://www.openssl.org)
+ * @module OpenSSL
+ * 
+ * @license Apache-2.0
+ * @copyright 2019 DIGITALARSENAL.IO, INC.
+ */
+
 import _WASI from "@wasmer/wasi";
 const WASI = isNode ? _WASI.WASI : _WASI; //module issue
 import { isNode } from "./isNode.js";

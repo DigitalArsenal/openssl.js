@@ -38,6 +38,13 @@ OpenSSL.js is available through [npm](https://www.npmjs.com/package/openssl.js)
 npm install openssl.js
 ```
 
+Usage
+=
+The main export exposes the OpenSSL class; the constructor takes two arguments in an args object:
+- `fs`:  Use either the node builtin [fs](https://nodejs.org/dist/latest-v13.x/docs/api/fs.html) or an API compatible version like [@wasmer/wasmfs](https://github.com/wasmerio/wasmer-js/tree/master/packages/wasmfs) (which uses [memfs](https://github.com/streamich/memfs)), or [BrowserFS](https://github.com/jvilk/BrowserFS)
+- `rootDir`: The path in the file system to map to the root (`/`) of the OpenSSL.js instance to use for file IO
+
+The instance exposes a single method, `runCommand`, which accepts a string containing commands to be run against the [OpenSSL command line interface](https://www.openssl.org/docs/man1.1.1/).
 
 
 Examples
