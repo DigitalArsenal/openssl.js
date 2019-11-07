@@ -3,14 +3,14 @@
 ![npm](https://img.shields.io/npm/v/openssl.js)
 ![dependencies](https://img.shields.io/david/digitalarsenal/openssl.js)
 
-### A WebAssembly port of OpenSSL for Node and the Browser.
+### A WebAssembly port of OpenSSL for [node](https://nodejs.org) and the browser.
 
 
 
 Quick Start
 =
 
-### ES6
+#### ES6 Module (main)
 ```javascript
 import { OpenSSL } from "../dist/openssl.js";
 import { fileURLToPath } from "url";
@@ -30,7 +30,18 @@ const __dirname = dirname(__filename);
 })();
 ```
 
+Installation
+=
 
+OpenSSL.js is available through [npm](https://www.npmjs.com/package/openssl.js)
+```
+npm install openssl.js
+```
+
+
+
+Examples
+=
 ### CJS
 ```javascript
 const { OpenSSL } = require('../dist/openssl.cjs.js');
