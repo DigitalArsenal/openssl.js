@@ -5,6 +5,8 @@
 
 ### A WebAssembly port of [OpenSSL](https://openssl.org) for [node](https://nodejs.org) and the browser.
 
+## LICENSE: [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
 ## NOTE:  
 This is a source-code build of [OpenSSL](https://openssl.org) using the [wasienv toolchain](https://github.com/wasienv/wasienv).  The test suite is still under development.  Until it is complete, the author makes no claims concerning accuracy or security.  Use at your own risk.
 

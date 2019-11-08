@@ -1,7 +1,7 @@
 {
   "name": "openssl.js",
   "type": "module",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "WebAssembly port of OpenSSL",
   "main": "/dist/openssl.js",
   "browser": "dist/browser.openssl.js",
