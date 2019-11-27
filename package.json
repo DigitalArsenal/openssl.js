@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.1.7",
   "description": "WebAssembly port of OpenSSL",
-  "main": "/dist/openssl.js",
+  "main": "dist/openssl.js",
   "browser": "dist/browser.openssl.js",
   "repository": {
     "type": "git",
