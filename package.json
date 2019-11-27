@@ -1,7 +1,7 @@
 {
   "name": "openssl.js",
   "type": "module",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "WebAssembly port of OpenSSL",
   "main": "/dist/openssl.js",
   "browser": "dist/browser.openssl.js",
@@ -48,7 +48,6 @@
     "test": "npm run test:main && npm run test:cjs",
     "test:cjs": "node ./test/test.cjs.js",
     "test:main":"node --experimental-wasm-bigint --experimental-modules ./test/test.js",
-    "postinstall": "cp node_modules/@wasmer/wasmfs/lib/index.esm.js src/wasmfs.esm.js",
     "build": "mkdir -p dist && rm -rf dist/*.* && npm run build:browser",
     "build:openssl": "cd packages/openssl && ./build.sh && cp openssl.wasm ../../src/openssl.wasm && cd ../../ && npm run build:transform",
     "build:transform": "node --experimental-modules ./scripts/transform.mjs --src ./src/raw-wasm/openssl1.1.1d.wasm --out ./src/openssl.wasm",
