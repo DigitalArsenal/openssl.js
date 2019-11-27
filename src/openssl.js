@@ -45,10 +45,18 @@ export class OpenSSL {
         );
         return run({ command, wasmBinary, ...this });
       } else {
-        const response = await fetch(args.wasmBinaryPath);
-        const responseArrayBuffer = await response.arrayBuffer();
+        let response;
+        let responseArrayBuffer;
+        if (args.wasmBinaryPath) {
+          response = await fetch(args.wasmBinaryPath);
+        }
+        if (response && response.arrayBuffer) {
+          responseArrayBuffer = await response.arrayBuffer();
+        }
         const wasmBinary = new Uint8Array(responseArrayBuffer);
-        return run({ command, wasmBinary, ...this });
+        if (wasmBinary.length) {
+          return run({ command, wasmBinary, ...this });
+        }
       }
     };
   }
