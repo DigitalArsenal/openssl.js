@@ -46,8 +46,8 @@
   },
   "scripts": {
     "test": "npm run test:main && npm run test:cjs",
-    "test:cjs": "node ./test/test.cjs.js",
-    "test:main":"node --experimental-wasm-bigint --experimental-modules ./test/test.js",
+    "test:cjs": "node ./test/test.cjs",
+    "test:main": "node --experimental-wasm-bigint --experimental-modules ./test/test.js",
     "build": "mkdir -p dist && rm -rf dist/*.* && npm run build:browser",
     "build:openssl": "cd packages/openssl && ./build.sh && cp openssl.wasm ../../src/openssl.wasm && cd ../../ && npm run build:transform",
     "build:transform": "node --experimental-modules ./scripts/transform.mjs --src ./src/raw-wasm/openssl1.1.1d.wasm --out ./src/openssl.wasm",

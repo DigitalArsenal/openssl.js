@@ -73,7 +73,7 @@ export default [
       format: "esm"
     },
     plugins: [
-      replacr(/import[\s\S]{1,}@wasmer\/wasi["'`];[^;]{1,};/, `import WASI from "@wasmer/wasi/lib/index.cjs.js";`, true),
+      replacr(/import[\s\S]{1,}@wasmer\/wasi["'`];[^;]{1,};/, `import WASI from "@wasmer/wasi/lib/index.cjs";`, true),
       ...plugins
     ],
     external
@@ -81,11 +81,11 @@ export default [
   {
     input: "./src/openssl.js",
     output: {
-      file: "./dist/openssl.cjs.js",
+      file: "./dist/openssl.cjs",
       format: "cjs"
     },
     plugins: [
-      replacr(/import[\s\S]{1,}@wasmer\/wasi["'`];[^;]{1,};/, `import WASI from "@wasmer/wasi/lib/index.cjs.js";`, true),
+      replacr(/import[\s\S]{1,}@wasmer\/wasi["'`];[^;]{1,};/, `import WASI from "@wasmer/wasi/lib/index.cjs";`, true),
       ...plugins
     ],
     external

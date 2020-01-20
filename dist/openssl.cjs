@@ -127,7 +127,7 @@ const run = async args => {
   }
   if (isNode && !_filename) {
     const { fileURLToPath } = await new Promise(function (resolve) { resolve(_interopNamespace(require('url'))); }); //SyntaxError: Parenthesized pattern ({fileURLToPath})
-    _filename = fileURLToPath((typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('openssl.cjs.js', document.baseURI).href)));
+    _filename = fileURLToPath((typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('openssl.cjs', document.baseURI).href)));
   }
 
   let command = ["openssl"].concat(
@@ -244,7 +244,7 @@ class OpenSSL {
       if (isNode) {
         const { fileURLToPath } = await new Promise(function (resolve) { resolve(_interopNamespace(require('url'))); });
         const { dirname, resolve } = await new Promise(function (resolve) { resolve(_interopNamespace(require('path'))); });
-        const _filename = fileURLToPath((typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('openssl.cjs.js', document.baseURI).href)));
+        const _filename = fileURLToPath((typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('openssl.cjs', document.baseURI).href)));
         const _dirname = dirname(_filename);
         
         return run({ command, wasmBinary, ...this });

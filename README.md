@@ -54,7 +54,7 @@ Examples
 =
 ### CJS
 ```javascript
-const { OpenSSL } = require('../dist/openssl.cjs.js');
+const { OpenSSL } = require('../dist/openssl.cjs');
 const { resolve } = require('path');
 const fs = require('fs');
 
