@@ -20,14 +20,14 @@ cd ../openssl-${OPENSSL_VERSION}
 echo "Configure"
 make clean
 
-../../wasmtools/emscripten/emconfigure ./Configure gcc -std=gnu11 -no-tests -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 --with-rand-seed=getrandom|| exit $?
+wasiconfigure ./Configure gcc -no-tests -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 --with-rand-seed=getrandom || exit $?
 sed -i -e "s/CNF_EX_LIBS=/CNF_EX_LIBS=-lwasi-emulated-mman /g" Makefile
-make  apps/progs.h
+make apps/progs.h
 
 sed -i 's|^CROSS_COMPILE.*$|CROSS_COMPILE=|g' Makefile
 
 echo "Build"
-make -j8 build_generated libssl.a libcrypto.a apps/openssl 
+wasimake make -j12 build_generated libssl.a libcrypto.a apps/openssl
 
 rm -rf ${PREFIX}/include
 mkdir -p ${PREFIX}/include

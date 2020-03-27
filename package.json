@@ -53,7 +53,9 @@
     "build:transform": "node --experimental-modules ./scripts/transform.mjs --src ./src/raw-wasm/openssl1.1.1d.wasm --out ./src/openssl.wasm",
     "build:browser": "rollup -c ./scripts/rollup.config.js",
     "dev": "nodemon -w src --exec 'npm run build && npm run test'",
-    "dev:test": "nodemon -w test --exec 'npm run test:main'"
+    "dev:test": "nodemon -w test --exec 'npm run test:main'",
+    "install": "npm run install:wasienv && git submodule init && git submodule update && git submodule foreach git pull origin master && cd ./packages/wasmtools/ && git submodule init && git submodule update",
+    "install:wasienv": "curl https://raw.githubusercontent.com/wasienv/wasienv/master/install.sh | sh"
   },
   "dependencies": {}
 }
