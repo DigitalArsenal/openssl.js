@@ -113,7 +113,7 @@ const isNode = !!(
 /**
  * ECMAScript Interface to WASM port of OpenSSL (https://www.openssl.org)
  * @module OpenSSL
- * 
+ *
  * @license Apache-2.0
  * @copyright 2019 DIGITALARSENAL.IO, INC.
  */
@@ -122,17 +122,13 @@ const run = async args => {
   let _filename;
   try {
     _filename = __filename;
-  } catch (e) {
-
-  }
+  } catch (e) {}
   if (isNode && !_filename) {
     const { fileURLToPath } = await new Promise(function (resolve) { resolve(_interopNamespace(require('url'))); }); //SyntaxError: Parenthesized pattern ({fileURLToPath})
     _filename = fileURLToPath((typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('openssl.cjs', document.baseURI).href)));
   }
 
-  let command = ["openssl"].concat(
-    args.command.split(/[\s]{1,}/g).filter(Boolean)
-  );
+  let command = ["openssl"].concat(args.command.split(/[\s]{1,}/g).filter(Boolean));
 
   if (!isNode || (isNode && process.env.WORKER)) {
     let { fs, rootDir, env, wasmBinary } = args;
@@ -152,29 +148,22 @@ const run = async args => {
       wasi_unstable: wasi.wasiImport
     });
 
-    try {
-      wasi.start(instance);
-    } catch (e) { }
+    wasi.start(instance);
   } else {
     const { wasmBinary, ...envArgs } = args;
     const { fork } = await new Promise(function (resolve) { resolve(_interopNamespace(require('child_process'))); });
     let cp = fork(_filename, {
       silent: false,
+      stdio: "pipe",
       env: {
         args: JSON.stringify(envArgs),
         WORKER: true
       }
     });
 
-    cp.on('error', () => {
-      console.error('no wasm');
-    });
-
     cp.send({ wasmBinary: wasmBinary });
     return new Promise((resolve, reject) => {
-      cp.on("exit", code => {
-        resolve(code);
-      });
+      resolve(cp);
     });
   }
 };
