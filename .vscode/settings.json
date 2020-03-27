@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "rand_int.h": "c",
+        "cryptlib.h": "c",
+        "random": "c"
+    }
+}

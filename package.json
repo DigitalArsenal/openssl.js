@@ -1,0 +1,59 @@
+{
+  "name": "openssl.js",
+  "type": "module",
+  "version": "1.1.9",
+  "description": "WebAssembly port of OpenSSL",
+  "main": "dist/openssl.js",
+  "browser": "dist/browser.openssl.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DigitalArsenal/openssl.js.git"
+  },
+  "keywords": [
+    "openssl",
+    "pki",
+    "certificates",
+    "crypto",
+    "cryptography",
+    "encryption",
+    "keypair",
+    "ssh",
+    "ssl",
+    "tls"
+  ],
+  "author": "digitalarsenal.io",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/DigitalArsenal/openssl.js/issues"
+  },
+  "homepage": "https://github.com/DigitalArsenal/openssl.js#readme",
+  "devDependencies": {
+    "@rollup/plugin-replace": "^2.2.0",
+    "nodemon": "^1.19.4",
+    "rollup": "^1.26.0",
+    "rollup-plugin-brotli": "^2.0.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-url": "^3.0.0",
+    "bl": ">=0.9.5",
+    "@wasmer/wasi": "^0.4.5",
+    "@wasmer/wasm-transformer": "^0.4.5",
+    "@wasmer/wasmfs": "^0.4.5",
+    "browserfs": "^1.4.3",
+    "optimist": "^0.6.1"
+  },
+  "scripts": {
+    "test": "npm run test:main && npm run test:cjs",
+    "test:cjs": "node ./test/test.cjs",
+    "test:main": "node --experimental-wasm-bigint --experimental-modules ./test/test.js",
+    "build": "mkdir -p dist && rm -rf dist/*.* && npm run build:browser",
+    "build:openssl": "cd packages/openssl && ./build.sh && cp openssl.wasm ../../src/openssl.wasm && cd ../../ && npm run build:transform",
+    "build:transform": "node --experimental-modules ./scripts/transform.mjs --src ./src/raw-wasm/openssl1.1.1d.wasm --out ./src/openssl.wasm",
+    "build:browser": "rollup -c ./scripts/rollup.config.js",
+    "dev": "nodemon -w src --exec 'npm run build && npm run test'",
+    "dev:test": "nodemon -w test --exec 'npm run test:main'"
+  },
+  "dependencies": {}
+}
