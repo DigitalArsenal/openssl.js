@@ -1,0 +1,3 @@
+[submodule "packages/wasmtools"]
+	path = packages/wasmtools
+	url = git@github.com:DigitalArsenal/wasmtools.git
