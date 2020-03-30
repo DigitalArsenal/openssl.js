@@ -1,7 +1,7 @@
 {
   "name": "openssl.js",
   "type": "module",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "WebAssembly port of OpenSSL",
   "main": "dist/openssl.js",
   "browser": "dist/browser.openssl.js",
@@ -29,20 +29,20 @@
   "homepage": "https://github.com/DigitalArsenal/openssl.js#readme",
   "devDependencies": {
     "@rollup/plugin-replace": "^2.2.0",
+    "@wasmer/wasi": "^0.4.5",
+    "@wasmer/wasm-transformer": "^0.4.5",
+    "@wasmer/wasmfs": "^0.4.5",
+    "bl": ">=0.9.5",
+    "browserfs": "^1.4.3",
     "nodemon": "^1.19.4",
+    "optimist": "^0.6.1",
     "rollup": "^1.26.0",
     "rollup-plugin-brotli": "^2.0.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^5.1.2",
-    "rollup-plugin-url": "^3.0.0",
-    "bl": ">=0.9.5",
-    "@wasmer/wasi": "^0.4.5",
-    "@wasmer/wasm-transformer": "^0.4.5",
-    "@wasmer/wasmfs": "^0.4.5",
-    "browserfs": "^1.4.3",
-    "optimist": "^0.6.1"
+    "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-url": "^3.0.0"
   },
   "scripts": {
     "test": "npm run test:main && npm run test:cjs",
@@ -53,9 +53,9 @@
     "build:transform": "node ./scripts/transform.mjs --src ./src/raw-wasm/openssl1.1.1d.wasm --out ./src/openssl.wasm",
     "build:browser": "rollup -c ./scripts/rollup.config.js",
     "dev": "nodemon -w src --exec 'npm run build && npm run test'",
+    "install": "npm run build:openssl",
     "dev:test": "nodemon -w test --exec 'npm run test:main'",
-    "install": "npm run install:wasienv && git submodule init && git submodule update && git submodule foreach git pull origin master && cd ./packages/wasmtools/ && git submodule init &&  git submodule foreach git clean -fxd && git submodule foreach git reset HEAD --hard && git submodule foreach git pull origin master && git submodule update",
-    "install:wasienv": "curl https://raw.githubusercontent.com/wasienv/wasienv/master/install.sh | sh"
+    "publish:git": "git push git@github.com:DigitalArsenal/openssl.js openssl:master"
   },
   "dependencies": {}
 }
