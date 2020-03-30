@@ -200,7 +200,7 @@ const run = async args => {
     _filename = fileURLToPath(import.meta.url);
   }
 
-  let command = Array.isArray(args.command) ? args.command : ["openssl"].concat(args.command.split(/[\s]{1,}/g).filter(Boolean));
+  let command = Array.isArray(args.command) ? args.command : (args.command.split(/[\s]{1,}/g).filter(Boolean));
 
   if (!isNode || (isNode && process.env.WORKER)) {
     let { fs, rootDir, env, wasmBinary } = args;

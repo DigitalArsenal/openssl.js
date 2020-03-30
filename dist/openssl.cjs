@@ -128,7 +128,7 @@ const run = async args => {
     _filename = fileURLToPath((typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('openssl.cjs', document.baseURI).href)));
   }
 
-  let command = Array.isArray(args.command) ? args.command : ["openssl"].concat(args.command.split(/[\s]{1,}/g).filter(Boolean));
+  let command = Array.isArray(args.command) ? args.command : (args.command.split(/[\s]{1,}/g).filter(Boolean));
 
   if (!isNode || (isNode && process.env.WORKER)) {
     let { fs, rootDir, env, wasmBinary } = args;
