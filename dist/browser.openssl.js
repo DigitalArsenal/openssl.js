@@ -194,13 +194,13 @@ const run = async args => {
   let _filename;
   try {
     _filename = __filename;
-  } catch (e) {}
+  } catch (e) { }
   if (isNode && !_filename) {
     const { fileURLToPath } = await import('url'); //SyntaxError: Parenthesized pattern ({fileURLToPath})
     _filename = fileURLToPath(import.meta.url);
   }
 
-  let command = ["openssl"].concat(args.command.split(/[\s]{1,}/g).filter(Boolean));
+  let command = Array.isArray(args.command) ? args.command : ["openssl"].concat(args.command.split(/[\s]{1,}/g).filter(Boolean));
 
   if (!isNode || (isNode && process.env.WORKER)) {
     let { fs, rootDir, env, wasmBinary } = args;

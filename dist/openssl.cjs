@@ -122,13 +122,13 @@ const run = async args => {
   let _filename;
   try {
     _filename = __filename;
-  } catch (e) {}
+  } catch (e) { }
   if (isNode && !_filename) {
     const { fileURLToPath } = await new Promise(function (resolve) { resolve(_interopNamespace(require('url'))); }); //SyntaxError: Parenthesized pattern ({fileURLToPath})
     _filename = fileURLToPath((typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('openssl.cjs', document.baseURI).href)));
   }
 
-  let command = ["openssl"].concat(args.command.split(/[\s]{1,}/g).filter(Boolean));
+  let command = Array.isArray(args.command) ? args.command : ["openssl"].concat(args.command.split(/[\s]{1,}/g).filter(Boolean));
 
   if (!isNode || (isNode && process.env.WORKER)) {
     let { fs, rootDir, env, wasmBinary } = args;

@@ -1,5 +1,5 @@
 const { OpenSSL } = require("../dist/openssl.cjs");
-const { resolve } = require("path");
+const path = require("path");
 const fs = require("fs");
 
 const output = (result, cb) => {
@@ -18,13 +18,18 @@ const output = (result, cb) => {
   });
 };
 
-(async function() {
-  let rootDir = resolve(__dirname, "../sandbox");
+(async function () {
+  let rootDir = path.resolve(__dirname, "../sandbox");
   let openSSL = new OpenSSL({ fs, rootDir });
 
   let result1 = await openSSL.runCommand("genrsa -out /private.pem");
-  output(result1, async function() {
+  output(result1, async function () {
     let result2 = await openSSL.runCommand("rsa -in /private.pem -pubout");
     output(result2);
+  });
+  let result3 = await openSSL.runCommand(["genrsa", "-out", "/private2.pem"]);
+  output(result3, async function () {
+    let result4 = await openSSL.runCommand(["rsa", "-in", "/private2.pem", "-pubout"]);
+    output(result4);
   });
 })();
